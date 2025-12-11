@@ -17,7 +17,7 @@ def claim_daily_reward(user_id):
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    wait = WebDriverWait(driver, 5)
+    wait = WebDriverWait(driver, 10)
 
     try:
         print(f"[{user_id}] Login web...")
@@ -29,7 +29,7 @@ def claim_daily_reward(user_id):
         go_to_store_btn.click()
         print(f"[{user_id}] Clicked 'Go to Store'")
 
-        time.sleep(1)
+        time.sleep(3)
 
         print(f"[{user_id}] Finding Free Item...")
 
@@ -44,7 +44,7 @@ def claim_daily_reward(user_id):
                     print(f"[{user_id}] --- Processing Item {index + 1} ---")
 
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn)
-                    time.sleep(1) 
+                    time.sleep(3) 
 
                     wait.until(EC.element_to_be_clickable(btn)).click()
                     print(f"[{user_id}] Clicked Claim item {index + 1}")
@@ -86,5 +86,6 @@ if __name__ == "__main__":
         time.sleep(5)
     
     print("\nFINISHED.")
+
 
 
