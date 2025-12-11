@@ -17,7 +17,7 @@ def claim_daily_reward(user_id):
     options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-    wait = WebDriverWait(driver, 20)
+    wait = WebDriverWait(driver, 5)
 
     try:
         print(f"[{user_id}] Login web...")
@@ -29,7 +29,7 @@ def claim_daily_reward(user_id):
         go_to_store_btn.click()
         print(f"[{user_id}] Clicked 'Go to Store'")
 
-        time.sleep(5)
+        time.sleep(1)
 
         print(f"[{user_id}] Finding Free Item...")
 
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     for uid in LIST_USER_IDS:
         claim_daily_reward(uid)
-        print("Rest 5 minutes")
         time.sleep(5)
     
     print("\nFINISHED.")
+
