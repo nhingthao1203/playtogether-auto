@@ -12,7 +12,7 @@ def claim_daily_reward():
     BASE_URL = "https://hub.playtogether.haegin.kr/go/login?player_id=AKHE-TTHL-LMGC&local=vi"
 
     options = webdriver.ChromeOptions()
-    # options.add_argument("--headless") # Tạm thời comment headless để bạn dễ debug (nhìn thấy trình duyệt)
+    options.add_argument("--headless")
     options.add_argument("--window-size=1920,1080")
 
     options.add_argument(
@@ -77,4 +77,5 @@ def claim_daily_reward():
 
 
 if __name__ == "__main__":
+
     claim_daily_reward()
