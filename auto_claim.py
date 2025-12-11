@@ -74,6 +74,7 @@ def claim_daily_reward(user_id):
 
 if __name__ == "__main__":
     LIST_USER_IDS = [
+        "DMBETTHLLMYG",
         "RM3ZACRLLMGY", 
         "XMHTYCRLLMYY",  
         "8LCFU5ZLLMYU", 
@@ -85,4 +86,5 @@ if __name__ == "__main__":
         time.sleep(5)
     
     print("\nFINISHED.")
+
 
