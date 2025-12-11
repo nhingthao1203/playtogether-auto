@@ -6,76 +6,83 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 
-
-def claim_daily_reward():
-    # Cấu hình user_id và URL
-    BASE_URL = "https://hub.playtogether.haegin.kr/go/login?player_id=AKHE-TTHL-LMGC&local=vi"
+def claim_daily_reward(user_id):
+    print(f"\n{'='*10} START: {user_id} {'='*10}")
+    
+    BASE_URL = f"https://hub.playtogether.haegin.kr/go/login?player_id={user_id}&local=vi"
 
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument("--window-size=1920,1080")
-
-    options.add_argument(
-        "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     wait = WebDriverWait(driver, 20)
 
     try:
-        print("Login web...")
+        print(f"[{user_id}] Login web...")
         driver.get(BASE_URL)
 
-        print("Go to Store...")
+        print(f"[{user_id}] Go to Store...")
         go_to_store_btn = wait.until(EC.element_to_be_clickable(
             (By.XPATH, "//button[contains(., 'Go to Store')] | //div[contains(text(), 'Go to Store')]")))
         go_to_store_btn.click()
-        print("Clicked 'Go to Store'")
+        print(f"[{user_id}] Clicked 'Go to Store'")
 
         time.sleep(5)
 
-        print("Finding Free Item...")
+        print(f"[{user_id}] Finding Free Item...")
 
         xpath_claim = "//button[contains(., 'Claim')] | //div[contains(text(), 'Claim')] | //span[contains(text(), 'Claim')] | //div[contains(text(), 'Free')]"
         claim_buttons = driver.find_elements(By.XPATH, xpath_claim)
 
-        print(f"Found {len(claim_buttons)} items to claim.")
+        print(f"[{user_id}] Found {len(claim_buttons)} items to claim.")
 
         if len(claim_buttons) > 0:
             for index, btn in enumerate(claim_buttons):
                 try:
-                    print(f"--- Processing Item {index + 1} ---")
+                    print(f"[{user_id}] --- Processing Item {index + 1} ---")
 
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn)
-                    time.sleep(1)  # Đợi scroll ổn định
+                    time.sleep(1) 
 
                     wait.until(EC.element_to_be_clickable(btn)).click()
-                    print(f"Clicked Claim item {index + 1}")
+                    print(f"[{user_id}] Clicked Claim item {index + 1}")
 
-                    print("Waiting for 'Continue' popup...")
+                    print(f"[{user_id}] Waiting for 'Continue' popup...")
 
                     xpath_continue = "//button[contains(., 'Continue')] | //div[contains(text(), 'Continue')] | //button[contains(., 'OK')] | //div[contains(text(), 'OK')]"
 
                     continue_btn = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_continue)))
                     continue_btn.click()
-                    print("Clicked 'Continue/OK' button")
+                    print(f"[{user_id}] Clicked 'Continue/OK' button")
 
                     time.sleep(3)
 
                 except Exception as e:
-                    print(f"Error at item {index + 1}: {e}")
+                    print(f"[{user_id}] Error at item {index + 1}: {e}")
                     continue
         else:
-            print(" No 'Claim' buttons found.")
+            print(f"[{user_id}] No 'Claim' buttons found.")
 
     except Exception as e:
-        print(f"Global Error: {e}")
+        print(f"[{user_id}] Global Error: {e}")
 
     finally:
-        print("Finished script.")
-        time.sleep(5)
+        print(f"[{user_id}] Finished script.")
         driver.quit()
 
-
 if __name__ == "__main__":
+    LIST_USER_IDS = [
+        "RM3ZACRLLMGY", 
+        "XMHTYCRLLMYY",  
+        "8LCFU5ZLLMYU", 
+        "PJFVCCRLLMGY",
+    ]
 
-    claim_daily_reward()
+    for uid in LIST_USER_IDS:
+        claim_daily_reward(uid)
+        print("Rest 5 minutes")
+        time.sleep(5)
+    
+    print("\nFINISHED.")
