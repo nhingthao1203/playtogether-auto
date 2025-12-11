@@ -41,6 +41,7 @@ def claim_daily_reward(user_id):
         if len(claim_buttons) > 0:
             for index, btn in enumerate(claim_buttons):
                 try:
+                    if index == 2 : break
                     print(f"[{user_id}] --- Processing Item {index + 1} ---")
 
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn)
@@ -86,6 +87,7 @@ if __name__ == "__main__":
         time.sleep(5)
     
     print("\nFINISHED.")
+
 
 
 
