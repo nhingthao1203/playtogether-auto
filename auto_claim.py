@@ -31,7 +31,7 @@ def claim_daily_reward(user_id):
         go_to_store_btn.click()
         print(f"[{user_id}] Clicked 'Go to Store'")
 
-        time.sleep(1)
+        time.sleep(3)
 
         print(f"[{user_id}] Finding Free Item...")
 
@@ -151,12 +151,13 @@ if __name__ == "__main__":
         "KJBVCCRLLMYG",
         "XMHTYCRLLMYY",
         "YMEG-DD9L-LMGY",
+        "YL7E-S2ZL-LMYG",
     ]
-    LIST_USER_IDS_vi = [
-        "KJBVCCRLLMYG",
-        "XMHTYCRLLMYY",
-        "YMEG-DD9L-LMGY",
-    ]
+    # LIST_USER_IDS_vi = [
+    #     "KJBVCCRLLMYG",
+    #     "XMHTYCRLLMYY",
+    #     "YMEG-DD9L-LMGY",
+    # ]
 
     for uid in LIST_USER_IDS:
         claim_daily_reward(uid)
@@ -164,12 +165,11 @@ if __name__ == "__main__":
         claim_daily_reward(uid)
         time.sleep(1)
 
-    for uid in LIST_USER_IDS_vi:
-        claim_daily_reward_vi(uid)
-        time.sleep(1)
-        claim_daily_reward_vi(uid)
-        time.sleep(1)
+    # for uid in LIST_USER_IDS_vi:
+    #     claim_daily_reward_vi(uid)
+    #     time.sleep(1)
+    #     claim_daily_reward_vi(uid)
+    #     time.sleep(1)
     print("\nFINISHED.")
-
 
 
