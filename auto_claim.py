@@ -45,20 +45,20 @@ def claim_daily_reward(user_id):
                     print(f"[{user_id}] --- Processing Item {index + 1} ---")
 
                     driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", btn)
-                    time.sleep(3) 
+                    #time.sleep(3) 
 
-                    wait.until(EC.element_to_be_clickable(btn)).click()
-                    print(f"[{user_id}] Clicked Claim item {index + 1}")
+                    #wait.until(EC.element_to_be_clickable(btn)).click()
+                    #print(f"[{user_id}] Clicked Claim item {index + 1}")
 
-                    print(f"[{user_id}] Waiting for 'Continue' popup...")
+                    #print(f"[{user_id}] Waiting for 'Continue' popup...")
 
-                    xpath_continue = "//button[contains(., 'Continue')] | //div[contains(text(), 'Continue')] | //button[contains(., 'OK')] | //div[contains(text(), 'OK')]"
+                    #xpath_continue = "//button[contains(., 'Continue')] | //div[contains(text(), 'Continue')] | //button[contains(., 'OK')] | //div[contains(text(), 'OK')]"
 
-                    continue_btn = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_continue)))
-                    continue_btn.click()
-                    print(f"[{user_id}] Clicked 'Continue/OK' button")
+                    #continue_btn = wait.until(EC.element_to_be_clickable((By.XPATH, xpath_continue)))
+                    #continue_btn.click()
+                    #print(f"[{user_id}] Clicked 'Continue/OK' button")
 
-                    time.sleep(3)
+                    #time.sleep(3)
 
                 except Exception as e:
                     print(f"[{user_id}] Error at item {index + 1}: {e}")
@@ -87,6 +87,7 @@ if __name__ == "__main__":
         time.sleep(5)
     
     print("\nFINISHED.")
+
 
 
 
